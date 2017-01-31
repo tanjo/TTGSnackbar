@@ -37,6 +37,7 @@ import Darwin
  - SlideFromLeftToRight:        Slide from the left to show and slide to rigth to dismiss.
  - SlideFromRightToLeft:        Slide from the right to show and slide to left to dismiss.
  - Flip:                        Flip to show and dismiss.
+ - SlideFromLeftToLeft:         Slide from the left to show and slide to left to dismiss.
  */
 
 @objc public enum TTGSnackbarAnimationType: Int {
@@ -47,6 +48,7 @@ import Darwin
     case slideFromRightToLeft
     case slideFromTopToBottom
     case slideFromTopBackToTop
+    case slideFromLeftToLeft
 }
 
 open class TTGSnackbar: UIView {
@@ -546,8 +548,8 @@ public extension TTGSnackbar {
         case .slideFromBottomBackToBottom, .slideFromBottomToTop:
             bottomMarginConstraint?.constant = snackbarHeight
             
-        case .slideFromLeftToRight:
-            leftMarginConstraint?.constant = leftMargin - superViewWidth
+        case .slideFromLeftToRight, .slideFromLeftToLeft:
+          leftMarginConstraint?.constant = leftMargin - superViewWidth
             rightMarginConstraint?.constant = -rightMargin - superViewWidth
             bottomMarginConstraint?.constant = -bottomMargin
             centerXConstraint?.constant = -superViewWidth
@@ -647,7 +649,7 @@ public extension TTGSnackbar {
             rightMarginConstraint?.constant = -rightMargin + superViewWidth
             centerXConstraint?.constant = superViewWidth
             
-        case .slideFromRightToLeft:
+        case .slideFromRightToLeft, .slideFromLeftToLeft:
             leftMarginConstraint?.constant = leftMargin - superViewWidth
             rightMarginConstraint?.constant = -rightMargin - superViewWidth
             centerXConstraint?.constant = -superViewWidth
